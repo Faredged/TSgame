@@ -87,3 +87,32 @@ function executeBattle(attacker: Hero, defender: Hero): string {
     const attackResult = computeDamage(attacker, defender);
     return `${attacker.name} attacks ${defender.name} dealing ${attackResult.damageDealt} damage ${attackResult.wasCritical ? '(CRITICAL!)' : ''}. Remaining health of ${defender.name}: ${attackResult.remainingHealth}.`;
   }
+  // Initialize heroes
+const heroCollection: Hero[] = [
+    generateHero("Arthur", HeroType.Knight),
+    generateHero("Morgan", HeroType.Sorcerer),
+    generateHero("Shadow", HeroType.Rogue)
+  ];
+  
+  console.log("<<< Battle Setup >>>");
+  console.log(heroCollection);
+  
+  // Simulate multiple rounds
+  console.log("\n<<< Battle Rounds >>>");
+  for (let round = 1; round <= 6; round++) {
+    console.log(`\nRound ${round}:`);
+    console.log(executeBattle(heroCollection[0], heroCollection[1]));
+    console.log(executeBattle(heroCollection[1], heroCollection[2]));
+    console.log(executeBattle(heroCollection[2], heroCollection[0]));
+  }
+  
+  // Final hero stats
+  console.log("\n<<< Final Hero Stats >>>");
+  heroCollection.forEach(hero => {
+    console.log(`${hero.name} - Health: ${hero.attributes.health}, Alive: ${hero.alive}`);
+  });
+  
+  // Searching for a specific hero
+  const foundHero = locateHero(heroCollection, "heroType", HeroType.Sorcerer);
+  console.log("\n<<< Searched Hero >>>");
+  console.log(foundHero);
