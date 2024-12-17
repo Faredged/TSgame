@@ -78,4 +78,12 @@ function generateHero(name: string, heroType: HeroType): Hero {
     return heroes.find(hero => hero[property] === value);
   }
   
+  // Function to execute a battle round
+function executeBattle(attacker: Hero, defender: Hero): string {
+    if (!attacker.alive || !defender.alive) {
+        return `${!attacker.alive ? attacker.name : defender.name} is already defeated.`;
+    }
   
+    const attackResult = computeDamage(attacker, defender);
+    return `${attacker.name} attacks ${defender.name} dealing ${attackResult.damageDealt} damage ${attackResult.wasCritical ? '(CRITICAL!)' : ''}. Remaining health of ${defender.name}: ${attackResult.remainingHealth}.`;
+  }
